@@ -222,12 +222,72 @@ interface Cliente {
 }
 ```
 
+## 🏗️ Backend API e Banco de Dados
+
+Este projeto agora inclui um backend completo com integração para banco de dados na nuvem!
+
+### 🗄️ Configuração do Banco de Dados na Nuvem
+
+#### Opções de Provedores Suportados:
+- **Railway** 🚄 (Recomendado para iniciantes)
+- **Supabase** 🎯 (Tier gratuito disponível)
+- **Neon** ⚡ (PostgreSQL serverless)
+- **AWS RDS** 🌐 (Para produção)
+
+#### Configuração Rápida:
+
+1. **Instalar dependências do backend:**
+   ```bash
+   npm run backend:install
+   ```
+
+2. **Configurar variáveis de ambiente:**
+   ```bash
+   cp backend/.env.example backend/.env
+   # Edite backend/.env com sua URL do banco
+   ```
+
+3. **Executar migrações e seed:**
+   ```bash
+   npm run setup:cloud
+   ```
+
+4. **Iniciar em desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
+
+### 🔗 Estrutura da API
+
+#### Endpoints Disponíveis:
+- `GET /api/clients` - Listar clientes
+- `POST /api/clients` - Criar cliente
+- `GET /api/clients/:id` - Buscar cliente
+- `PUT /api/clients/:id` - Atualizar cliente
+- `DELETE /api/clients/:id` - Deletar cliente
+- `GET /api/clients/stats` - Estatísticas dashboard
+- `GET /health` - Health check
+
+#### Funcionalidades:
+- ✅ CRUD completo de clientes
+- ✅ Filtros e busca
+- ✅ Paginação
+- ✅ Status automático (PENDING/PAID/OVERDUE)
+- ✅ Validação de dados
+- ✅ Rate limiting
+- ✅ CORS configurado
+- ✅ Error handling
+
+### 📋 Deployment Guide
+
+Consulte `backend/deploy.md` para instruções detalhadas de deployment com diferentes provedores de nuvem.
+
 ## 🚀 Próximos Passos
 
-Para expandir o sistema, considere implementar:
+Funcionalidades adicionais que podem ser implementadas:
 
-1. **Backend API** (Node.js + Express + Prisma)
-2. **Banco de Dados** (PostgreSQL/MySQL)
+1. ✅ **Backend API** (Node.js + Express + Prisma) - **IMPLEMENTADO**
+2. ✅ **Banco de Dados** (PostgreSQL na nuvem) - **IMPLEMENTADO**
 3. **Autenticação** (JWT + bcrypt)
 4. **Notificações** (Email + SMS)
 5. **Relatórios PDF** (jsPDF)

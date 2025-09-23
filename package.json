@@ -9,7 +9,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "serve": "serve -s build -l 3000",
-    "dev": "concurrently \"cd backend && npm run dev\" \"npm start\""
+    "dev": "concurrently \"cd backend && npm run dev\" \"npm start\"",
+    "backend:install": "cd backend && npm install",
+    "backend:migrate": "cd backend && npm run prisma:migrate",
+    "backend:seed": "cd backend && npm run prisma:seed",
+    "setup:cloud": "npm run backend:install && npm run backend:migrate && npm run backend:seed"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
