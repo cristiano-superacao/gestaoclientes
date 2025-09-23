@@ -101,37 +101,82 @@ npm run build
 
 ## 🛠️ Tecnologias
 
+### Frontend
 - **React 18** - Framework principal
 - **TypeScript** - Tipagem estática
+- **Vite** - Build tool e desenvolvimento
 - **Tailwind CSS** - Estilização utilitária
 - **shadcn/ui** - Componentes de interface
 - **Recharts** - Gráficos e visualizações
 - **Lucide React** - Ícones modernos
 - **date-fns** - Manipulação de datas
-- **Vite** - Build tool e desenvolvimento
 
-## 📦 Instalação
+### Backend
+- **Node.js + Express** - Servidor API
+- **Prisma ORM** - Database toolkit
+- **PostgreSQL** - Banco de dados na nuvem
+- **CORS + Helmet** - Segurança
+- **Rate Limiting** - Proteção contra abuso
 
-1. **Clone o repositório**
+## 🚀 Como Usar com Banco de Dados na Nuvem
+
+### 📋 Pré-requisitos
+- Node.js 18+ instalado
+- Uma conta em um provedor de banco PostgreSQL na nuvem
+
+### ⚡ Setup Rápido
+
+1. **Clone e instale dependências:**
    ```bash
    git clone <url-do-repositorio>
    cd gestao-clientes
+   npm install --legacy-peer-deps
+   npm run backend:install
    ```
 
-2. **Instale as dependências**
+2. **Configure o banco de dados:**
    ```bash
-   npm install
+   # Copie o arquivo de exemplo
+   cp backend/.env.example backend/.env
+   
+   # Edite backend/.env e configure sua DATABASE_URL
+   # Exemplo para Railway: postgresql://postgres:password@host:port/railway
+   # Exemplo para Supabase: postgresql://postgres:password@host:port/postgres
    ```
 
-3. **Execute em modo de desenvolvimento**
+3. **Execute migrações e dados iniciais:**
+   ```bash
+   npm run setup:cloud
+   ```
+
+4. **Inicie o sistema:**
    ```bash
    npm run dev
    ```
 
-4. **Acesse o sistema**
-   ```
-   http://localhost:5173
-   ```
+   Acesse:
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:3001
+   - Health Check: http://localhost:3001/health
+
+### 🏗️ Estrutura Completa
+
+```
+gestao-clientes/
+├── src/                    # Frontend React + TypeScript
+│   ├── components/ui/      # Componentes UI
+│   ├── lib/               # Utilitários e API
+│   ├── types/             # Definições TypeScript
+│   └── App.tsx            # Componente principal
+├── backend/               # Backend Node.js + Express
+│   ├── src/
+│   │   ├── controllers/   # Controllers da API
+│   │   ├── routes/        # Rotas da API
+│   │   └── config/        # Configurações
+│   ├── prisma/           # Schema e migrations
+│   └── deploy.md         # Guia de deployment
+└── README.md             # Este arquivo
+```
 
 ## 📁 Estrutura do Projeto
 
@@ -222,12 +267,72 @@ interface Cliente {
 }
 ```
 
+## 🏗️ Backend API e Banco de Dados
+
+Este projeto agora inclui um backend completo com integração para banco de dados na nuvem!
+
+### 🗄️ Configuração do Banco de Dados na Nuvem
+
+#### Opções de Provedores Suportados:
+- **Railway** 🚄 (Recomendado para iniciantes)
+- **Supabase** 🎯 (Tier gratuito disponível)
+- **Neon** ⚡ (PostgreSQL serverless)
+- **AWS RDS** 🌐 (Para produção)
+
+#### Configuração Rápida:
+
+1. **Instalar dependências do backend:**
+   ```bash
+   npm run backend:install
+   ```
+
+2. **Configurar variáveis de ambiente:**
+   ```bash
+   cp backend/.env.example backend/.env
+   # Edite backend/.env com sua URL do banco
+   ```
+
+3. **Executar migrações e seed:**
+   ```bash
+   npm run setup:cloud
+   ```
+
+4. **Iniciar em desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
+
+### 🔗 Estrutura da API
+
+#### Endpoints Disponíveis:
+- `GET /api/clients` - Listar clientes
+- `POST /api/clients` - Criar cliente
+- `GET /api/clients/:id` - Buscar cliente
+- `PUT /api/clients/:id` - Atualizar cliente
+- `DELETE /api/clients/:id` - Deletar cliente
+- `GET /api/clients/stats` - Estatísticas dashboard
+- `GET /health` - Health check
+
+#### Funcionalidades:
+- ✅ CRUD completo de clientes
+- ✅ Filtros e busca
+- ✅ Paginação
+- ✅ Status automático (PENDING/PAID/OVERDUE)
+- ✅ Validação de dados
+- ✅ Rate limiting
+- ✅ CORS configurado
+- ✅ Error handling
+
+### 📋 Deployment Guide
+
+Consulte `backend/deploy.md` para instruções detalhadas de deployment com diferentes provedores de nuvem.
+
 ## 🚀 Próximos Passos
 
-Para expandir o sistema, considere implementar:
+Funcionalidades adicionais que podem ser implementadas:
 
-1. **Backend API** (Node.js + Express + Prisma)
-2. **Banco de Dados** (PostgreSQL/MySQL)
+1. ✅ **Backend API** (Node.js + Express + Prisma) - **IMPLEMENTADO**
+2. ✅ **Banco de Dados** (PostgreSQL na nuvem) - **IMPLEMENTADO**
 3. **Autenticação** (JWT + bcrypt)
 4. **Notificações** (Email + SMS)
 5. **Relatórios PDF** (jsPDF)
